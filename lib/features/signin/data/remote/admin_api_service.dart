@@ -13,26 +13,20 @@ abstract class AdminApiService {
   }
 
   @POST("/login")
-  Future<LoginResponse> login(@Body() LoginRequest request);
-
-  @POST("/login/center")
-  Future<LoginResponse> chooseCenter(@Body() CenterSelectionRequest request);
-
-  @PUT("/password")
-  Future<PasswordUpdateResponse> updatePassword(@Body() PasswordUpdateRequest request);
+  Future<LoginResponseDto> login(@Body() LoginRequestDto request);
 
   @POST("/signup")
-  Future<SignupResponse> register(@Body() SignupRequest request);
+  Future<LoginResponseDto> register(@Body() SignupRequestDto request);
 
   @PUT("/signup/complete")
-  Future<SignupResponse> completeSignup();
+  Future<BaseResponseDto<void>> completeSignup();
 
   @POST("/signup/sendCode")
-  Future<BaseResponse> sendSignupCode(@Body() SendCodeRequest request);
+  Future<BaseResponseDto<void>> sendSignupCode(@Body() SendCodeRequestDto request);
 
   @POST("/signup/verifyCode")
-  Future<BaseResponse> verifySignupCode(@Body() VerifyCodeRequest request);
+  Future<BaseResponseDto<void>> verifySignupCode(@Body() VerifyCodeRequestDto request);
 
   @GET("/profile")
-  Future<ProfileResponse> getProfile();
+  Future<BaseResponseDto<ProfileDataDto>> getProfile();
 }
