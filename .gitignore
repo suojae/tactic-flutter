@@ -43,3 +43,15 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# 환경 변수 파일 (Flutter dotenv)
+/.env
+.env.*
+
+# 코드 생성 파일 (Retrofit, Freezed, json_serializable 등)
+lib/**/*.g.dart
+lib/**/*.freezed.dart
+lib/**/*.mocks.dart
+lib/**/*.gr.dart
+lib/**/*.config.dart
+lib/**/*.injectable.dart
