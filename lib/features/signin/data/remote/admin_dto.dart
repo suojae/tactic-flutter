@@ -2,144 +2,94 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'admin_dto.g.dart';
 
+@JsonSerializable(genericArgumentFactories: true)
+class BaseResponseDto<T> {
+  final int code;
+  final T? data;
+
+  BaseResponseDto({required this.code, this.data});
+
+  factory BaseResponseDto.fromJson(Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
+      _$BaseResponseDtoFromJson(json, fromJsonT);
+
+  Map<String, dynamic> toJson(Object Function(T?) toJsonT) =>
+      _$BaseResponseDtoToJson(this, toJsonT);
+}
+
 @JsonSerializable()
-class LoginRequest {
+class LoginRequestDto {
   final String phone;
   final String password;
 
-  LoginRequest({required this.phone, required this.password});
+  LoginRequestDto({required this.phone, required this.password});
 
-  factory LoginRequest.fromJson(Map<String, dynamic> json) => _$LoginRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$LoginRequestToJson(this);
+  factory LoginRequestDto.fromJson(Map<String, dynamic> json) => _$LoginRequestDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$LoginRequestDtoToJson(this);
 }
 
 @JsonSerializable()
-class LoginResponse {
-  final int code;
-  final LoginData data;
-
-  LoginResponse({required this.code, required this.data});
-
-  factory LoginResponse.fromJson(Map<String, dynamic> json) => _$LoginResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
-}
-
-@JsonSerializable()
-class LoginData {
+class LoginDataDto {
   final String accessToken;
   final String? coach;
   final String? center;
   final List<String>? centers;
 
-  LoginData({required this.accessToken, this.coach, this.center, this.centers});
+  LoginDataDto({required this.accessToken, this.coach, this.center, this.centers});
 
-  factory LoginData.fromJson(Map<String, dynamic> json) => _$LoginDataFromJson(json);
-  Map<String, dynamic> toJson() => _$LoginDataToJson(this);
+  factory LoginDataDto.fromJson(Map<String, dynamic> json) => _$LoginDataDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$LoginDataDtoToJson(this);
 }
 
 @JsonSerializable()
-class CenterSelectionRequest {
-  final int centerId;
-
-  CenterSelectionRequest({required this.centerId});
-
-  factory CenterSelectionRequest.fromJson(Map<String, dynamic> json) => _$CenterSelectionRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$CenterSelectionRequestToJson(this);
-}
-
-@JsonSerializable()
-class PasswordUpdateRequest {
-  final String phone;
-  final String email;
-  final String password;
-
-  PasswordUpdateRequest({required this.phone, required this.email, required this.password});
-
-  factory PasswordUpdateRequest.fromJson(Map<String, dynamic> json) => _$PasswordUpdateRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$PasswordUpdateRequestToJson(this);
-}
-
-/// 🔹 비밀번호 변경 응답 DTO
-@JsonSerializable()
-class PasswordUpdateResponse {
-  final int code;
-  final ProfileData data;
-
-  PasswordUpdateResponse({required this.code, required this.data});
-
-  factory PasswordUpdateResponse.fromJson(Map<String, dynamic> json) => _$PasswordUpdateResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$PasswordUpdateResponseToJson(this);
-}
-
-@JsonSerializable()
-class SendCodeRequest {
-  final String phone;
-  final String email;
-
-  SendCodeRequest({required this.phone, required this.email});
-
-  factory SendCodeRequest.fromJson(Map<String, dynamic> json) => _$SendCodeRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$SendCodeRequestToJson(this);
-}
-
-@JsonSerializable()
-class VerifyCodeRequest {
-  final String phone;
-  final String email;
-  final String code;
-
-  VerifyCodeRequest({required this.phone, required this.email, required this.code});
-
-  factory VerifyCodeRequest.fromJson(Map<String, dynamic> json) => _$VerifyCodeRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$VerifyCodeRequestToJson(this);
-}
-
-@JsonSerializable()
-class SignupRequest {
+class SignupRequestDto {
   final String phone;
   final String password;
   final String email;
   final String name;
   final String birthday;
   final String gender;
+  final bool lesson;
+  final bool representative;
+  final List<EducationDto> educations;
+  final List<QualificationDto> qualifications;
+  final List<WorkDto> works;
+  final List<GameDto> games;
+  final String fileKey;
+  final bool verifyPhone;
+  final bool verifyEmail;
+  final bool agreeGeneral;
+  final bool agreePrivacy;
+  final bool agreeMarketing;
+  final bool validYear;
 
-  SignupRequest({
+  SignupRequestDto({
     required this.phone,
     required this.password,
     required this.email,
     required this.name,
     required this.birthday,
     required this.gender,
+    required this.lesson,
+    required this.representative,
+    required this.educations,
+    required this.qualifications,
+    required this.works,
+    required this.games,
+    required this.fileKey,
+    required this.verifyPhone,
+    required this.verifyEmail,
+    required this.agreeGeneral,
+    required this.agreePrivacy,
+    required this.agreeMarketing,
+    required this.validYear,
   });
 
-  factory SignupRequest.fromJson(Map<String, dynamic> json) => _$SignupRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$SignupRequestToJson(this);
+  factory SignupRequestDto.fromJson(Map<String, dynamic> json) => _$SignupRequestDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$SignupRequestDtoToJson(this);
 }
 
 @JsonSerializable()
-class SignupResponse {
-  final int code;
-  final LoginData data;
-
-  SignupResponse({required this.code, required this.data});
-
-  factory SignupResponse.fromJson(Map<String, dynamic> json) => _$SignupResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$SignupResponseToJson(this);
-}
-
-@JsonSerializable()
-class ProfileResponse {
-  final int code;
-  final ProfileData data;
-
-  ProfileResponse({required this.code, required this.data});
-
-  factory ProfileResponse.fromJson(Map<String, dynamic> json) => _$ProfileResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$ProfileResponseToJson(this);
-}
-
-@JsonSerializable()
-class ProfileData {
+class ProfileDataDto {
   final int id;
   final String status;
   final String phone;
@@ -157,7 +107,7 @@ class ProfileData {
   final bool agreeMarketing;
   final bool validYear;
 
-  ProfileData({
+  ProfileDataDto({
     required this.id,
     required this.status,
     required this.phone,
@@ -176,19 +126,86 @@ class ProfileData {
     required this.validYear,
   });
 
-  factory ProfileData.fromJson(Map<String, dynamic> json) => _$ProfileDataFromJson(json);
-  Map<String, dynamic> toJson() => _$ProfileDataToJson(this);
+  factory ProfileDataDto.fromJson(Map<String, dynamic> json) => _$ProfileDataDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$ProfileDataDtoToJson(this);
 }
 
-@JsonSerializable(genericArgumentFactories: true)
-class BaseResponse<T> {
-  final int code;
-  final T? data;
+@JsonSerializable()
+class EducationDto {
+  final int coachId;
+  final String name;
+  final String department;
+  final String degree;
 
-  BaseResponse({required this.code, this.data});
+  EducationDto({required this.coachId, required this.name, required this.department, required this.degree});
 
-  factory BaseResponse.fromJson(Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
-      _$BaseResponseFromJson(json, fromJsonT);
-
-  Map<String, dynamic> toJson(Object Function(T?) toJsonT) => _$BaseResponseToJson(this, toJsonT);
+  factory EducationDto.fromJson(Map<String, dynamic> json) => _$EducationDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$EducationDtoToJson(this);
 }
+
+@JsonSerializable()
+class QualificationDto {
+  final int coachId;
+  final String issuer;
+  final String name;
+  final int fileId;
+
+  QualificationDto({required this.coachId, required this.issuer, required this.name, required this.fileId});
+
+  factory QualificationDto.fromJson(Map<String, dynamic> json) => _$QualificationDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$QualificationDtoToJson(this);
+}
+
+@JsonSerializable()
+class WorkDto {
+  final int coachId;
+  final String name;
+  final String rank;
+  final String period;
+
+  WorkDto({required this.coachId, required this.name, required this.rank, required this.period});
+
+  factory WorkDto.fromJson(Map<String, dynamic> json) => _$WorkDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$WorkDtoToJson(this);
+}
+
+@JsonSerializable()
+class GameDto {
+  final int coachId;
+  final String name;
+  final String type;
+  final String detail;
+
+  GameDto({required this.coachId, required this.name, required this.type, required this.detail});
+
+  factory GameDto.fromJson(Map<String, dynamic> json) => _$GameDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$GameDtoToJson(this);
+}
+
+@JsonSerializable()
+class SendCodeRequestDto {
+  final String phone;
+  final String email;
+
+  SendCodeRequestDto({required this.email, required this.phone});
+
+  factory SendCodeRequestDto.fromJson(Map<String, dynamic> json) => _$SendCodeRequestDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$SendCodeRequestDtoToJson(this);
+}
+
+@JsonSerializable()
+class VerifyCodeRequestDto {
+  final int verificationId;
+  final String method;
+  final String code;
+
+  VerifyCodeRequestDto({required this.verificationId, required this.method, required this.code});
+
+  factory VerifyCodeRequestDto.fromJson(Map<String, dynamic> json) => _$VerifyCodeRequestDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$VerifyCodeRequestDtoToJson(this);
+}
+
+// BaseResponseDto<T>를 활용한 응답 DTO
+typedef LoginResponseDto = BaseResponseDto<LoginDataDto>;
+typedef SignupResponseDto = BaseResponseDto<LoginDataDto>;
+typedef ProfileResponseDto = BaseResponseDto<ProfileDataDto>;
