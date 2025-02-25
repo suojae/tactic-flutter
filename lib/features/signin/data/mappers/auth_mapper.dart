@@ -1,3 +1,4 @@
+import '../../domain/entities/check_duplicate_result.dart';
 import '../../domain/entities/sign_up.dart';
 import '../../domain/entities/sign_up_result.dart';
 import '../../domain/entities/user.dart';
@@ -94,6 +95,12 @@ class AuthMapper {
     return SignupResult(
       accessToken: dto.data!.accessToken,
       user: toUser(dto.data!),
+    );
+  }
+
+  static CheckDuplicateResult toCheckDuplicateResult(CheckDuplicateAdminResponseDto dto) {
+    return CheckDuplicateResult(
+      isDuplicate: dto.data?.duplicate == "true",
     );
   }
 }
