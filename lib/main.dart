@@ -1,6 +1,7 @@
 import 'package:chat_sdk/shared/design/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/onboarding/presentation/onboarding_cubit.dart';
@@ -8,6 +9,7 @@ import 'features/onboarding/presentation/onboarding_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
   final prefs = await SharedPreferences.getInstance();
   final hasCompletedOnboarding = prefs.getBool('has_completed_onboarding') ?? false;
   final themeManager = await ThemeManager.create();
