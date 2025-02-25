@@ -229,11 +229,26 @@ class CheckDuplicateAdminRequestDto {
   // 날짜 형식 검증 함수
   static String? _validateDateFormat(String? date) {
     if (date == null) return null;
+    
+    // YYYY-MM-DD 형식 검사
     final regex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
     if (!regex.hasMatch(date)) {
       throw ArgumentError("Invalid birthday format. Expected YYYY-MM-DD");
     }
-    return date;
+
+    // 존재하는 날짜인지 검사
+    try {
+      final parsedDate = DateTime.parse(date);
+      final formatted = "${parsedDate.year.toString().padLeft(4, '0')}-"
+          "${parsedDate.month.toString().padLeft(2, '0')}-"
+          "${parsedDate.day.toString().padLeft(2, '0')}";
+      if (date != formatted) {
+        throw ArgumentError("Invalid date. The date does not exist.");
+      }
+      return date;
+    } catch (e) {
+      throw ArgumentError("Invalid date. The date does not exist.");
+    }
   }
 }
 
