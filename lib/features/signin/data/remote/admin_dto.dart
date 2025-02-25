@@ -205,7 +205,50 @@ class VerifyCodeRequestDto {
   Map<String, dynamic> toJson() => _$VerifyCodeRequestDtoToJson(this);
 }
 
-// BaseResponseDto<T>를 활용한 응답 DTO
+@JsonSerializable()
+class CheckDuplicateAdminRequestDto {
+  final String? phone;
+  final String? email;
+  final String? name;
+
+  @JsonKey(fromJson: _validateDateFormat)
+  final String? birthday;
+
+  CheckDuplicateAdminRequestDto({
+    this.phone,
+    this.email,
+    this.name,
+    this.birthday,
+  });
+
+  factory CheckDuplicateAdminRequestDto.fromJson(Map<String, dynamic> json) =>
+      _$CheckDuplicateAdminRequestDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CheckDuplicateAdminRequestDtoToJson(this);
+
+  // 날짜 형식 검증 함수
+  static String? _validateDateFormat(String? date) {
+    if (date == null) return null;
+    final regex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
+    if (!regex.hasMatch(date)) {
+      throw ArgumentError("Invalid birthday format. Expected YYYY-MM-DD");
+    }
+    return date;
+  }
+}
+
+@JsonSerializable()
+class CheckDuplicateDataDto {
+  final String duplicate;
+
+  CheckDuplicateDataDto({required this.duplicate});
+
+  factory CheckDuplicateDataDto.fromJson(Map<String, dynamic> json) => _$CheckDuplicateDataDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CheckDuplicateDataDtoToJson(this);
+}
+
 typedef LoginResponseDto = BaseResponseDto<LoginDataDto>;
 typedef SignupResponseDto = BaseResponseDto<LoginDataDto>;
 typedef ProfileResponseDto = BaseResponseDto<ProfileDataDto>;
+typedef CheckDuplicateAdminResponseDto = BaseResponseDto<CheckDuplicateDataDto>;

@@ -8,9 +8,11 @@ part 'admin_api_service.g.dart';
 
 @RestApi(baseUrl: "")
 abstract class AdminApiService {
-  factory AdminApiService(Dio dio, {String? baseUrl}) {
-    return _AdminApiService(dio, baseUrl: dotenv.env['API_BASE_URL'] ?? "");
-  }
+  factory AdminApiService(Dio dio, {String? baseUrl}) =>
+      _AdminApiService(dio, baseUrl: dotenv.env['API_BASE_URL'] ?? "");
+
+  @GET("/duplicate")
+  Future<CheckDuplicateAdminResponseDto> checkDuplicateAdmin(@Body() CheckDuplicateAdminRequestDto request);
 
   @POST("/login")
   Future<LoginResponseDto> login(@Body() LoginRequestDto request);
