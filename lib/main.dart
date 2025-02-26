@@ -11,7 +11,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   final prefs = await SharedPreferences.getInstance();
-  final hasCompletedOnboarding = prefs.getBool('has_completed_onboarding') ?? false;
+  final hasCompletedOnboarding =
+      prefs.getBool('has_completed_onboarding') ?? false;
   final themeManager = await ThemeManager.create();
 
   runApp(MyApp(
@@ -44,7 +45,9 @@ class MyApp extends StatelessWidget {
             theme: ThemeManager.lightTheme,
             darkTheme: ThemeManager.darkTheme,
             themeMode: state is Dark ? ThemeMode.dark : ThemeMode.light,
-            home: hasCompletedOnboarding ? const HomeScreen() : const OnboardingScreen(),
+            home: hasCompletedOnboarding
+                ? const HomeScreen()
+                : const OnboardingScreen(),
           );
         },
       ),

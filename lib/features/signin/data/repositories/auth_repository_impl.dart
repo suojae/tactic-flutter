@@ -14,7 +14,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<User> login(String phone, String password) async {
-    final response = await _apiService.login(LoginRequestDto(phone: phone, password: password));
+    final response = await _apiService
+        .login(LoginRequestDto(phone: phone, password: password));
     return AuthMapper.toUser(response.data!);
   }
 
@@ -38,13 +39,16 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> sendSignupCode(String phone, String email) async {
-    await _apiService.sendSignupCode(SendCodeRequestDto(phone: phone, email: email));
+    await _apiService
+        .sendSignupCode(SendCodeRequestDto(phone: phone, email: email));
   }
 
   @override
-  Future<bool> verifySignupCode(int verificationId, String method, String code) async {
+  Future<bool> verifySignupCode(
+      int verificationId, String method, String code) async {
     final response = await _apiService.verifySignupCode(
-      VerifyCodeRequestDto(verificationId: verificationId, method: method, code: code),
+      VerifyCodeRequestDto(
+          verificationId: verificationId, method: method, code: code),
     );
     return response.code == 200; // 서버가 성공 응답을 200으로 보낸다고 가정
   }

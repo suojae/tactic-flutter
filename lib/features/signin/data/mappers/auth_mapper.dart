@@ -57,30 +57,38 @@ class AuthMapper {
       gender: entity.gender,
       lesson: entity.hasLesson,
       representative: entity.isRepresentative,
-      educations: entity.educations.map((e) => EducationDto(
-        coachId: e.coachId,
-        name: e.name,
-        department: e.department,
-        degree: e.degree,
-      )).toList(),
-      qualifications: entity.qualifications.map((q) => QualificationDto(
-        coachId: q.coachId,
-        issuer: q.issuer,
-        name: q.name,
-        fileId: q.fileId,
-      )).toList(),
-      works: entity.works.map((w) => WorkDto(
-        coachId: w.coachId,
-        name: w.name,
-        rank: w.rank,
-        period: w.period,
-      )).toList(),
-      games: entity.games.map((g) => GameDto(
-        coachId: g.coachId,
-        name: g.name,
-        type: g.type,
-        detail: g.detail,
-      )).toList(),
+      educations: entity.educations
+          .map((e) => EducationDto(
+                coachId: e.coachId,
+                name: e.name,
+                department: e.department,
+                degree: e.degree,
+              ))
+          .toList(),
+      qualifications: entity.qualifications
+          .map((q) => QualificationDto(
+                coachId: q.coachId,
+                issuer: q.issuer,
+                name: q.name,
+                fileId: q.fileId,
+              ))
+          .toList(),
+      works: entity.works
+          .map((w) => WorkDto(
+                coachId: w.coachId,
+                name: w.name,
+                rank: w.rank,
+                period: w.period,
+              ))
+          .toList(),
+      games: entity.games
+          .map((g) => GameDto(
+                coachId: g.coachId,
+                name: g.name,
+                type: g.type,
+                detail: g.detail,
+              ))
+          .toList(),
       fileKey: entity.fileKey,
       verifyPhone: entity.isPhoneVerified,
       verifyEmail: entity.isEmailVerified,
@@ -98,7 +106,8 @@ class AuthMapper {
     );
   }
 
-  static CheckDuplicateResult toCheckDuplicateResult(CheckDuplicateAdminResponseDto dto) {
+  static CheckDuplicateResult toCheckDuplicateResult(
+      CheckDuplicateAdminResponseDto dto) {
     return CheckDuplicateResult(
       isDuplicate: dto.data?.duplicate == "true",
     );

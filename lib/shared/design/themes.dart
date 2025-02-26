@@ -12,7 +12,7 @@ enum ThemePreference {
 
   static ThemePreference fromValue(int value) =>
       ThemePreference.values.firstWhere(
-            (e) => e.value == value,
+        (e) => e.value == value,
         orElse: () => ThemePreference.light,
       );
 }
@@ -55,7 +55,9 @@ class ThemeManager extends Cubit<AppThemeMode> {
     emit(newTheme);
     await _prefs.setInt(
       _prefsKey,
-      newTheme is Dark ? ThemePreference.dark.value : ThemePreference.light.value,
+      newTheme is Dark
+          ? ThemePreference.dark.value
+          : ThemePreference.light.value,
     );
   }
 
