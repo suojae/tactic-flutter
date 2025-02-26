@@ -265,5 +265,6 @@ class CheckDuplicateDataDto {
 
 typedef LoginResponseDto = BaseResponseDto<LoginDataDto>;
 typedef SignupResponseDto = BaseResponseDto<LoginDataDto>;
+typedef CompleteSignupResponseDto = BaseResponseDto<LoginDataDto>;
 typedef ProfileResponseDto = BaseResponseDto<ProfileDataDto>;
 typedef CheckDuplicateAdminResponseDto = BaseResponseDto<CheckDuplicateDataDto>;

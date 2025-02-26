@@ -29,6 +29,9 @@ abstract class AdminApiService {
   @POST("/signup/verifyCode")
   Future<BaseResponseDto<void>> verifySignupCode(@Body() VerifyCodeRequestDto request);
 
+  @PUT("/signup/complete")
+  Future<CompleteSignupResponseDto> completeSignUp(@Header("Authorization") String accessToken);
+
   @GET("/profile")
   Future<BaseResponseDto<ProfileDataDto>> getProfile();
 }

@@ -25,6 +25,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<SignupResult> completeSignup(String accessToken) async {
+    final response = await _apiService.completeSignUp(accessToken);
+    return AuthMapper.toSignupResult(response);
+  }
+
+  @override
   Future<User> getProfile() async {
     final response = await _apiService.getProfile();
     return AuthMapper.toUserFromProfile(response.data!);
