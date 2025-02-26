@@ -1,0 +1,13 @@
+#!/bin/sh
+echo "🔍 Running Dart format and analyze before commit..."
+
+# 자동 코드 정리 및 분석
+dart fix --apply
+dart format .
+dart analyze
+
+# 분석 결과에 오류가 있으면 커밋 차단
+if [ $? -ne 0 ]; then
+  echo "❌ Commit rejected: Fix issues before committing!"
+  exit 1
+fi

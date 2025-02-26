@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "🔄 Auto-applying Git hooks..."
+sh setup-hooks.sh
