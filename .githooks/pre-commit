@@ -1,13 +1,27 @@
 #!/bin/sh
-echo "🔍 Running Dart format and analyze before commit..."
+echo "🔍 Running Dart format and analyze only on staged files..."
 
-# 자동 코드 정리 및 분석
-dart fix --apply
-dart format .
-dart analyze
+# 커밋하려는 파일 목록 가져오기
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=d | grep '\.dart$')
 
-# 분석 결과에 오류가 있으면 커밋 차단
+# 커밋할 Dart 파일이 없으면 종료
+if [ -z "$STAGED_FILES" ]; then
+  echo "✅ No Dart files to check."
+  exit 0
+fi
+
+# 커밋할 파일에 대해 dart format 실행
+echo "🔧 Formatting staged Dart files..."
+echo "$STAGED_FILES" | xargs dart format -o write
+
+# 커밋할 파일에 대해 dart analyze 실행
+echo "🔍 Analyzing staged Dart files..."
+echo "$STAGED_FILES" | xargs dart analyze
+
+# 만약 `dart analyze`에서 오류가 발생하면 커밋 차단
 if [ $? -ne 0 ]; then
   echo "❌ Commit rejected: Fix issues before committing!"
   exit 1
 fi
+
+echo "✅ All checks passed! Proceeding with commit."
