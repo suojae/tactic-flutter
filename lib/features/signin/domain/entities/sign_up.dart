@@ -1,5 +1,5 @@
-import 'package:chat_sdk/features/signin/domain/entities/qualification.dart';
-import 'package:chat_sdk/features/signin/domain/entities/work.dart';
+import 'package:tactic/features/signin/domain/entities/qualification.dart';
+import 'package:tactic/features/signin/domain/entities/work.dart';
 
 import 'education.dart';
 import 'game.dart';

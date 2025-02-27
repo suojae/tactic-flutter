@@ -1,4 +1,4 @@
-import 'package:chat_sdk/features/signin/domain/entities/user.dart';
+import 'package:tactic/features/signin/domain/entities/user.dart';
 
 class SignupResult {
   final String accessToken;
