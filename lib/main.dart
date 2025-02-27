@@ -1,9 +1,9 @@
-import 'package:chat_sdk/shared/design/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tactic/shared/design/themes.dart';
 
+import 'features/signin/presentation/screens/signup_user_info_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'features/onboarding/presentation/onboarding_cubit.dart';
 import 'features/onboarding/presentation/onboarding_view.dart';
 
@@ -45,6 +45,15 @@ class MyApp extends StatelessWidget {
             theme: ThemeManager.lightTheme,
             darkTheme: ThemeManager.darkTheme,
             themeMode: state is Dark ? ThemeMode.dark : ThemeMode.light,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'), // 영어
+              Locale('ko'), // 한국어
+            ],
             home: hasCompletedOnboarding
                 ? const HomeScreen()
                 : const OnboardingScreen(),
